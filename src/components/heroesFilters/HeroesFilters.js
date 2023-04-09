@@ -2,17 +2,19 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import classNames from 'classnames';
 
-import { activeFilterChanged, fetchFilters } from '../../slices/filtersSlice';
+import { changeFilter, fetchFilters, selectAll } from '../../slices/filtersSlice';
 import Spinner from '../spinner/Spinner';
+import store from '../../store';
 
 const HeroesFilters = () => {
-
-    const {filters, filtersLoadingStatus, activeFilter} = useSelector(state => state.filters);
+    const { filtersLoadingStatus, activeFilter} = useSelector(state => state.filters)
+    const filters = selectAll(store.getState())
     const dispatch = useDispatch();
 
-    const onButtonClick = (name) => setTimeout(() => {dispatch(activeFilterChanged(name))}, 500)
+    const onButtonClick = (name) => setTimeout(() => {dispatch(changeFilter(name))}, 500)
 
     useEffect(() => {
+        console.log(filters)
         dispatch(fetchFilters());
         // eslint-disable-next-line
     }, []);
