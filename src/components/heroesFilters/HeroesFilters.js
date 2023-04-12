@@ -14,7 +14,6 @@ const HeroesFilters = () => {
     const onButtonClick = (name) => setTimeout(() => {dispatch(changeFilter(name))}, 500)
 
     useEffect(() => {
-        console.log(filters)
         dispatch(fetchFilters());
         // eslint-disable-next-line
     }, []);
